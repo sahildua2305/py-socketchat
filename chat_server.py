@@ -7,7 +7,7 @@ def broadcast_data(sock, message):
 		if socket != server_socket and socket != sock:
 			try:
 				socket.send(message)
-			except:
+			except :
 				socket.close()
 				CONNECTION_LIST.remove(socket)
 
@@ -17,7 +17,7 @@ if __name__ == "__main__":
 	PORT = 5000
 	
 	server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	server_socket = socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 	server_socket.listen(10)
 	
 	CONNECTION_LIST.append(server_socket)
@@ -39,8 +39,8 @@ if __name__ == "__main__":
 				try:
 					data = sock.recv(RECV_BUFFER)
 					if data:
-						broadcast_data(sock, "\r" + '<' + str(sock.getpeername()) + '> ' + data
-				except:
+						broadcast_data(sock, "\r" + '<' + str(sock.getpeername()) + '> ' + data)
+				except :
 					broadcast_data(sock, "Client (%s, %s) is offline" % addr)
 					print "Client (%s, %s) is offline" % addr
 					sock.close()
