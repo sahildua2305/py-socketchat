@@ -41,7 +41,7 @@ class ChatServer:
 		for sock in self.descriptors:
 			if sock != self.srvsock and sock != omit_sock:
 				sock.send(str)
-		print str,
+		print str
 	def accept_new_connection(self):
 		newsock, (remhost, remport) = self.srvsock.accept()
 		self.descriptors.append(newsock)
